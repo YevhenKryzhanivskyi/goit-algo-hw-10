@@ -4,19 +4,19 @@ from scipy.integrate import quad
 
 
 def f(x):
-    """Функція для інтегрування."""
+    # Функція для інтегрування
     return x ** 2
 
 
 def monte_carlo_integration(func, a, b, n_points=1_000_000):
-    """Обчислення інтеграла методом Монте-Карло."""
+    # Метод Монте-Карло для чисельного інтегрування
     x_rand = np.random.uniform(a, b, n_points)
     y_rand = func(x_rand)
     return (b - a) * np.mean(y_rand)
 
 
 def analytic_integration(a, b):
-    """Аналітичне обчислення інтеграла f(x) = x^2."""
+    # Аналітичне обчислення інтеграла
     return (b ** 3) / 3 - (a ** 3) / 3
 
 
@@ -34,13 +34,13 @@ def main():
     print("Аналітичний розрахунок:", analytic_result)
     print("Quad (SciPy):", quad_result)
 
-    # Побудова графіка
+    
     x = np.linspace(-0.5, 2.5, 400)
     y = f(x)
 
     fig, ax = plt.subplots()
 
-    # Малювання функції
+    
     ax.plot(x, y, 'r', linewidth=2)
 
     # Заповнення області під кривою
@@ -48,13 +48,13 @@ def main():
     iy = f(ix)
     ax.fill_between(ix, iy, color='gray', alpha=0.3)
 
-    # Налаштування графіка
+    
     ax.set_xlim([x[0], x[-1]])
     ax.set_ylim([0, max(y) + 0.1])
     ax.set_xlabel('x')
     ax.set_ylabel('f(x)')
 
-    # Додавання меж інтегрування та назви графіка
+    
     ax.axvline(x=a, color='gray', linestyle='--')
     ax.axvline(x=b, color='gray', linestyle='--')
     ax.set_title(
